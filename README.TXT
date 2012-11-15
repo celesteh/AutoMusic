@@ -1,7 +1,5 @@
-AutoMusic
-=========
-<h1>Invading the Realm of the Arts</h1>
-<b>Software Design Final Project</b>
+Invading the Realm of the Arts
+Software Design Final Project
 April 28, 2010
 Shane Moon, Jeffrey Atkinson, Rui Wang, Thomas Lamar
 
