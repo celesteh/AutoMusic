@@ -421,11 +421,17 @@ class Functions_Provider():
         file_rep = filename.split('/')[-1]
         self.listbox.insert(END, file_rep)
 
+        if self.fileDict is None:
+            self.fileDict = {file_rep: filename}
+        else:
+            self.fileDict[file_rep] = filename;
+
     def remove_this(self):
         try:
             selected = self.listbox.curselection()
             index = int(selected[0])
             self.listbox.delete(index)
+            del (self.fileDict[selected[0]])
         except:
             IndexError
 
@@ -576,6 +582,8 @@ class Markov(Functions_Provider):
         self.listbox.pack()
         lbfm.pack()
 
+        self.fileDict = {}
+
         # Buttons
         but_font = tkFont.Font(family = "Calibri", size = 12)
 
@@ -619,7 +627,8 @@ class Markov(Functions_Provider):
         """
         sourcefiles = []
         for midfile in self.listbox.get(0, END):
-            sourcefiles.append("Input Midis/" + str(midfile))
+            #sourcefiles.append("Input Midis/" + str(midfile)) #This assumption of input directory is wrong!
+            sourcefiles.append(str(self.fileDict[str(midfile)]))
 
         len_prevNotes = 2
         num_notes = 40
