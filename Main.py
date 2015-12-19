@@ -418,13 +418,22 @@ class Functions_Provider():
     def add_this(self):
         filename = askopenfilename(initialdir = 'Input Midis',
                                    filetypes=[("midifiles","*.mid")])
-        file_rep = filename.split('/')[-1]
-        self.listbox.insert(END, file_rep)
+        file_rep = str(filename.split('/')[-1])
 
         if self.fileDict is None:
             self.fileDict = {file_rep: filename}
         else:
+            if self.fileDict.get(file_rep) is not None:
+                i = 1;
+                key = file_rep + '-' + str(i)
+                while self.fileDict.get(key) is not None:
+                    i = i +1
+                    key = file_rep + '-' + str(i)
+                
+                file_rep = key
+
             self.fileDict[file_rep] = filename;
+        self.listbox.insert(END, file_rep)
 
     def remove_this(self):
         try:
